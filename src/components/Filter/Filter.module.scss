@@ -1,0 +1,135 @@
+@import '../default-style/style.module.scss';
+
+.filter {
+  &__list {
+    display: flex;
+    margin-bottom: 20px;
+    min-width: 320px;
+  }
+  &__item {
+    &:first-child .btn-radio-text {
+      border-radius: 8px 0 0 8px;
+    }
+    &:last-child .btn-radio-text {
+      border-radius: 0 8px 8px 0;
+    }
+  }
+}
+
+.btn {
+  &-radio {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+
+    transition:
+      color 0.3s ease-out,
+      background-color 0.3s ease-out;
+
+    &:focus-within .btn-radio-text,
+    &:active .btn-radio-text {
+      color: $text-color;
+      background-color: $hover-color;
+      border: 1px solid $hover-color;
+      transition:
+        color 0.3s ease-out,
+        background-color 0.3s ease-out;
+    }
+  }
+
+  &-radio-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  &-radio-text {
+    color: $text-color;
+    font-family: $font-family;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background-color: $background-color-item;
+
+    border: 1px solid rgb(223, 229, 236);
+    min-width: 168px;
+    padding: 15px;
+    text-align: center;
+
+    transition:
+      color 0.35s ease,
+      background-color 0.35s ease,
+      border 0.35s ease;
+
+    &:hover {
+      color: $text-color;
+      background-color: $hover-color;
+
+      transition:
+        color 0.35s ease,
+        background-color 0.35s ease,
+        border 0.35s ease;
+    }
+  }
+}
+
+.btn-radio-input:checked + .btn-radio-text {
+  color: #fff;
+  border: 1px solid $button-color;
+  background-color: $button-color;
+  transition:
+    color 0.35s ease,
+    background-color 0.35s ease,
+    border 0.35s ease;
+}
+
+@media (max-width: 940px) {
+  .filter {
+    &__list {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    &__item {
+      width: 100%;
+    }
+  }
+
+  .btn-radio {
+    width: 100%;
+
+    &-text {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .filter {
+    &__list {
+      flex-direction: column; // Меняем направление flex-элементов на столбец для меньших экранов
+      // margin-bottom: 20px;
+    }
+    &__item {
+      width: 100%; // Устанавливаем ширину на 100%
+
+      &:first-child .btn-radio-text,
+      &:last-child .btn-radio-text {
+        border-radius: 8px;
+      }
+    }
+  }
+
+  .btn-radio {
+    width: 100%; // Устанавливаем ширину на 100%
+
+    &-text {
+      width: 100%; // Устанавливаем ширину на 100%
+      padding: 10px; // Уменьшаем padding для уменьшения размера
+      border-radius: 8px;
+    }
+  }
+}

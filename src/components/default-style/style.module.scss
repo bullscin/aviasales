@@ -1,0 +1,69 @@
+$font-family: 'Open sans', sans-serif;
+$text-color: #4a4a4a;
+$button-color: #2196f3;
+$hover-color: #f1fcff;
+$gray-text-color: #a0b0b9;
+$white-color: #ffffff;
+$background-color: #f3f7fa;
+$background-color-item: rgb(255, 255, 255);
+$shadow-color: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+// @import '../default-style/style.module.scss';
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Open sans', sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+  background-color: $background-color;
+  font-weight: 400;
+  color: $text-color;
+}
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+
+  cursor: pointer;
+}
+
+.alert {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 17px;
+}
