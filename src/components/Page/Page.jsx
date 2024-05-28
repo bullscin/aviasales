@@ -1,5 +1,5 @@
 import React from "react";
-import NumberOfTransfers from "../NumberOfTransfers/NumberOfTransfers";
+import NumberTransfers from "../NumberTransfers/NumberTransfers";
 import Filter from "../Filter/Filter";
 import ListTickets from "../ListTickets/ListTickets";
 
@@ -8,7 +8,7 @@ import cl from "./Page.module.scss";
 function Page() {
   return (
     <main className={cl.main}>
-      <NumberOfTransfers />
+      <NumberTransfers />
       <section>
         <Filter />
         <ListTickets />

@@ -29,10 +29,12 @@
 
   &__item {
     padding: 10px 20px;
+    // width: 100%;
     transition: background-color 0.3s ease;
 
     &:hover,
     &:focus-within {
+      // width: 100%;
       background-color: $hover-color;
     }
   }
@@ -65,6 +67,18 @@
     &__list {
       flex-direction: column;
       align-items: start;
+    }
+  }
+}
+@media (max-width: 440px) {
+  .checkbox {
+    &__item {
+      width: 98%;
+      &:hover,
+      &:focus-within {
+        background-color: $hover-color;
+        width: 98%;
+      }
     }
   }
 }
