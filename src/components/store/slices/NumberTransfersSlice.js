@@ -30,19 +30,19 @@ const NumberTransfersSlice = createSlice({
       const { filter } = action.payload;
 
       // Создание нового состояния с обновленным значением выбранного фильтра
-      const newState = { ...state, [filter]: !state[filter] };
+      const copyState = { ...state, [filter]: !state[filter] };
 
       // Обновление состояния "all" в зависимости от состояния всех других фильтров
       if (filter !== 'all') {
-        newState.all =
-          newState.noTransfers &&
-          newState.oneTransfer &&
-          newState.twoTransfers &&
-          newState.threeTransfers;
+        copyState.all =
+          copyState.noTransfers &&
+          copyState.oneTransfer &&
+          copyState.twoTransfers &&
+          copyState.threeTransfers;
       }
 
-      console.log('toggleFilter:', newState);
-      return newState;
+      console.log('toggleFilter:', copyState);
+      return copyState;
     },
   },
 });
