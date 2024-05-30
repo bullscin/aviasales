@@ -8,9 +8,7 @@ const container = document.getElementById("root");
 const rootInstance = createRoot(container);
 
 rootInstance.render(
-  // <React.StrictMode>
   <Provider store={store}>
     <AviasalesApp />
   </Provider>,
-  // </React.StrictMode>
 );

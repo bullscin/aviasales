@@ -1,5 +1,5 @@
 import React from "react";
-import NumberTransfers from "../NumberTransfers/NumberTransfers";
+import NumberTransfers from "../NumberOfTransfers/NumberOfTransfers";
 import Filter from "../Filter/Filter";
 import ListTickets from "../ListTickets/ListTickets";
 

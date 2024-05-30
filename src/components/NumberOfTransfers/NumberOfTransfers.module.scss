@@ -1,0 +1,84 @@
+@import '../default-style/style.module.scss';
+
+.aside {
+  font-family: $font-family;
+  background-color: $background-color-item;
+  box-shadow: $shadow-color;
+  border-radius: 6px;
+  padding-bottom: 10px;
+  min-width: 232px;
+  max-height: 262px;
+
+  &__title {
+    margin: 20px 20px 10px;
+    line-height: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+}
+
+.checkbox {
+  font-family: $font-family;
+  height: 40px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    padding: 10px 20px;
+    // width: 100%;
+    transition: background-color 0.3s ease;
+
+    &:hover,
+    &:focus-within {
+      // width: 100%;
+      background-color: $hover-color;
+    }
+  }
+}
+
+@media (max-width: 940px) {
+  .aside {
+    min-width: 320px;
+
+    &__title {
+      text-align: center;
+    }
+  }
+  .checkbox {
+    &__list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      padding-left: 5px;
+    }
+
+    &__item {
+      padding: 10px 5px;
+    }
+  }
+}
+
+@media (max-width: 440px) {
+  .checkbox {
+    &__list {
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+}
+@media (max-width: 440px) {
+  .checkbox {
+    &__item {
+      width: 98%;
+      &:hover,
+      &:focus-within {
+        background-color: $hover-color;
+        width: 98%;
+      }
+    }
+  }
+}
