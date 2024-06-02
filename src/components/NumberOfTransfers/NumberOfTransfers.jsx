@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   toggleAll,
   toggleFilter,
-} from "../store/slices/numberOfTransfersSlice"; // Импорт действий из слайса
+} from "../../store/slices/numberOfTransfersSlice"; // Импорт действий из слайса
 
 import cl from "./NumberOfTransfers.module.scss";
 
@@ -74,5 +74,3 @@ export default function NumberOfTransfers() {
     </aside>
   );
 }
-
-//  NumberOfTransfers;

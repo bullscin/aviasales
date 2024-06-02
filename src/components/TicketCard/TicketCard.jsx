@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../img/S7 Logo.svg";
+import logo from "../../img/S7 Logo.svg";
 import cl from "./TicketCard.module.scss";
 
 function TicketCard() {
