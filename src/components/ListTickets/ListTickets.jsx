@@ -47,9 +47,10 @@ function ListTickets() {
 
   useEffect(() => {
     if (tickets.length > 0) {
-      dispatch(sortTickets({ tickets: tickets.filter(filterTickets) }));
+      const filteredTickets = tickets.filter(filterTickets);
+      dispatch(sortTickets({ tickets: filteredTickets }));
     }
-  }, [dispatch, selectedFilter, transfers]);
+  }, [dispatch, tickets, transfers, selectedFilter]);
 
   const sortedTickets = useSelector((state) => state.filters.sortedTickets);
 
