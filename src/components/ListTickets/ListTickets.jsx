@@ -20,12 +20,31 @@ function ListTickets() {
 
     if (transfers.all) return true;
     if (stops1 === 0 && stops2 === 0 && transfers.no) return true;
-    if (stops1 === 0 && stops2 === 1 && transfers.one) return true;
-    if (stops1 === 0 && stops2 === 2 && transfers.two) return true;
-    if (stops1 === 0 && stops2 === 3 && transfers.three) return true;
+    if (
+      (stops1 === 0 || stops2 === 0) &&
+      (stops1 === 1 || stops2 === 1) &&
+      transfers.one
+    )
+      return true;
+    if (
+      (stops1 === 0 || stops2 === 0) &&
+      (stops1 === 2 || stops2 === 2) &&
+      transfers.two
+    )
+      return true;
+    if (
+      (stops1 === 0 || stops2 === 0) &&
+      (stops1 === 3 || stops2 === 3) &&
+      transfers.three
+    )
+      return true;
+    if (stops1 === 1 && stops2 === 1 && transfers.one) return true;
+    if (stops1 === 2 && stops2 === 2 && transfers.two) return true;
+    if (stops1 === 3 && stops2 === 3 && transfers.three) return true;
 
     return false;
   };
+
   useEffect(() => {
     if (tickets.length > 0) {
       dispatch(sortTickets({ tickets: tickets.filter(filterTickets) }));
