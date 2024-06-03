@@ -46,11 +46,9 @@ function ListTickets() {
   };
 
   useEffect(() => {
-    if (tickets.length > 0) {
-      const filteredTickets = tickets.filter(filterTickets);
-      dispatch(sortTickets({ tickets: filteredTickets }));
-    }
-  }, [dispatch, tickets, transfers, selectedFilter]);
+    const filteredTickets = tickets.filter(filterTickets);
+    dispatch(sortTickets({ tickets: filteredTickets }));
+  }, [tickets, transfers, selectedFilter, dispatch]);
 
   const sortedTickets = useSelector((state) => state.filters.sortedTickets);
 
@@ -58,7 +56,7 @@ function ListTickets() {
     setVisibleCount((prevCount) => prevCount + 5);
   };
 
-  if (loading) {
+  if (loading && sortedTickets.length === 0) {
     return (
       <div>
         <Alert
