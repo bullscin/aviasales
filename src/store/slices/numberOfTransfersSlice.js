@@ -1,20 +1,19 @@
-/* eslint-disable no-console */
 import { createSlice } from '@reduxjs/toolkit';
 
 // Определение слайса для фильтров количества пересадок
 const numberOfTransfersSlice = createSlice({
-  name: 'filters', // Имя слайса
+  // Имя слайса
+  name: 'filters',
+  // Начальное состояние
   initialState: {
-    // Начальное состояние
     all: false,
     noTransfers: false,
     oneTransfer: false,
     twoTransfers: false,
     threeTransfers: false,
   },
+  // Определение редюсеров
   reducers: {
-    // Определение редюсеров
-
     // Редюсер для переключения всех фильтров
     toggleAll(state) {
       // Создание копии состояния
@@ -41,7 +40,6 @@ const numberOfTransfersSlice = createSlice({
           copyState.threeTransfers;
       }
 
-      console.log('toggleFilter:', copyState);
       return copyState;
     },
   },
@@ -49,6 +47,5 @@ const numberOfTransfersSlice = createSlice({
 
 // Экспорт действий для использования в компонентах
 export const { toggleAll, toggleFilter } = numberOfTransfersSlice.actions;
-
 // Экспорт редюсера для использования в store
 export default numberOfTransfersSlice.reducer;
