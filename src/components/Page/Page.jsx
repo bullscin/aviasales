@@ -4,31 +4,39 @@ import { useSelector, useDispatch } from "react-redux";
 import NumberTransfers from "../NumberOfTransfers/NumberOfTransfers";
 import Filter from "../Filter/Filter";
 import ListTickets from "../ListTickets/ListTickets";
-import { fetchSearchId, fetchTickets } from "../../service/service"; // Импортируем fetchTickets
+import { fetchSearchId, fetchTickets } from "../../service/service";
 
 import cl from "./Page.module.scss";
 
 function Page() {
   const dispatch = useDispatch();
-  const searchId = useSelector((state) => state.search.searchId); // Получаем searchId из Redux Store
-  const searchError = useSelector((state) => state.search.error); // Получаем ошибку из Redux Store
 
+  // Получение searchId и ошибки из Redux Store
+  const searchId = useSelector((state) => state.search.searchId);
+  const searchError = useSelector((state) => state.search.error);
+
+  // Запрос searchId при монтировании компонента
   useEffect(() => {
     dispatch(fetchSearchId());
   }, [dispatch]);
 
+  // Запрос билетов при обновлении searchId
   useEffect(() => {
     if (searchId) {
-      // Проверяем, есть ли searchId
-      dispatch(fetchTickets(searchId)); // Если есть, вызываем fetchTickets
+      dispatch(fetchTickets(searchId));
     }
-  }, [dispatch, searchId]); // Обновляем fetchTickets, если изменяется searchId
+  }, [dispatch, searchId]);
 
   return (
     <main className={cl.main}>
+      {/* Компонент для выбора количества пересадок */}
       <NumberTransfers />
+
       <section>
+        {/* Компонент для фильтрации билетов */}
         <Filter />
+
+        {/* Вывод сообщения об ошибке запроса searchId */}
         {searchError && (
           <Alert
             style={{ marginBottom: "20px" }}
@@ -36,6 +44,8 @@ function Page() {
             description={searchError.message}
           />
         )}
+
+        {/* Компонент для отображения списка билетов */}
         <ListTickets />
       </section>
     </main>

@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 // Определение слайса для фильтров количества пересадок
 const numberOfTransfersSlice = createSlice({
   // Имя слайса
-  name: 'filters',
+  name: 'transfers',
   // Начальное состояние
   initialState: {
     all: false,
-    noTransfers: false,
-    oneTransfer: false,
-    twoTransfers: false,
-    threeTransfers: false,
+    no: false,
+    one: false,
+    two: false,
+    three: false,
   },
   // Определение редюсеров
   reducers: {
@@ -34,10 +34,7 @@ const numberOfTransfersSlice = createSlice({
       // Обновление состояния "all" в зависимости от состояния всех других фильтров
       if (filter !== 'all') {
         copyState.all =
-          copyState.noTransfers &&
-          copyState.oneTransfer &&
-          copyState.twoTransfers &&
-          copyState.threeTransfers;
+          copyState.no && copyState.one && copyState.two && copyState.three;
       }
 
       return copyState;

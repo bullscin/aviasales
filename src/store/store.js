@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import numberOfTransfersReducer from './slices/numberOfTransfersSlice'; // Импорт редюсера
-import searchIdReducer from './slices/searchIdSlice'; // Импорт редюсера
-import ticketsReducer from './slices/ticketsSlice'; // Импорт редюсера
+import numberOfTransfersReducer from './slices/numberOfTransfersSlice';
+import searchIdReducer from './slices/searchIdSlice';
+import ticketsReducer from './slices/ticketsSlice';
+import filterReducer from './slices/filterSlice';
 
 // Создание Redux Store и добавление редюсера для управления состоянием
 const store = configureStore({
@@ -9,6 +10,7 @@ const store = configureStore({
     transfers: numberOfTransfersReducer,
     search: searchIdReducer,
     tickets: ticketsReducer,
+    filters: filterReducer,
   },
 });
 

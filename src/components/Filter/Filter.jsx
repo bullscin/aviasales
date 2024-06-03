@@ -1,18 +1,21 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import cl from "./Filter.module.scss";
+import { setFilter } from "../../store/slices/filterSlice";
 
-function Filter() {
-  const [checkedValue, setCheckedValue] = useState("cheapest");
+export default function Filter() {
+  const dispatch = useDispatch();
+  const selectedFilter = useSelector((state) => state.filters.selected);
 
-  const handleChange = (event) => {
-    const newValue = event.target.value;
-    // console.log(newValue); // Выведет актуальное значение
-    setCheckedValue(newValue);
+  // Обработчик изменения выбранного фильтра
+  const handleFilterChange = (filter) => {
+    dispatch(setFilter(filter));
   };
 
   return (
     <ul className={cl.filter__list}>
+      {/* Первый фильтр - "Самый дешёвый" */}
       <li className={cl.filter__item}>
         <button type="button" className={cl["btn-radio"]}>
           <input
@@ -21,8 +24,8 @@ function Filter() {
             name="filter"
             value="cheapest"
             id="cheapest"
-            checked={checkedValue === "cheapest"}
-            onChange={handleChange}
+            checked={selectedFilter === "cheapest"} // Проверяем, выбран ли этот фильтр
+            onChange={() => handleFilterChange("cheapest")} // Вызываем функцию для обработки изменения фильтра
           />
           <label className={cl["btn-radio-text"]} htmlFor="cheapest">
             Самый дешёвый
@@ -30,6 +33,7 @@ function Filter() {
         </button>
       </li>
 
+      {/* Второй фильтр - "Самый быстрый" */}
       <li className={cl.filter__item}>
         <button type="button" className={cl["btn-radio"]}>
           <input
@@ -38,8 +42,8 @@ function Filter() {
             name="filter"
             value="fastest"
             id="fastest"
-            checked={checkedValue === "fastest"}
-            onChange={handleChange}
+            checked={selectedFilter === "fastest"}
+            onChange={() => handleFilterChange("fastest")}
           />
           <label className={cl["btn-radio-text"]} htmlFor="fastest">
             Самый быстрый
@@ -47,6 +51,7 @@ function Filter() {
         </button>
       </li>
 
+      {/* Третий фильтр - "Оптимальный" */}
       <li className={cl.filter__item}>
         <button type="button" className={cl["btn-radio"]}>
           <input
@@ -55,8 +60,8 @@ function Filter() {
             name="filter"
             value="optimal"
             id="optimal"
-            checked={checkedValue === "optimal"}
-            onChange={handleChange}
+            checked={selectedFilter === "optimal"}
+            onChange={() => handleFilterChange("optimal")}
           />
           <label className={cl["btn-radio-text"]} htmlFor="optimal">
             Оптимальный
@@ -66,5 +71,3 @@ function Filter() {
     </ul>
   );
 }
-
-export default Filter;

@@ -1,45 +1,91 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Alert, Spin } from "antd";
 import TicketCard from "../TicketCard/TicketCard";
 import cl from "./ListTickets.module.scss";
+import { sortTickets } from "../../store/slices/filterSlice";
 
 function ListTickets() {
-  const [visibleCount, setVisibleCount] = useState(5); // Начальное состояние для отображаемых билетов
-
+  const [visibleCount, setVisibleCount] = useState(5);
+  const dispatch = useDispatch();
   const tickets = useSelector((state) => state.tickets.tickets);
   const loading = useSelector((state) => state.tickets.loading);
+  const ticketsError = useSelector((state) => state.tickets.error);
+  const selectedFilter = useSelector((state) => state.filters.selected);
+  const transfers = useSelector((state) => state.transfers);
+
+  const filterTickets = (ticket) => {
+    const stops1 = ticket.segments[0].stops.length;
+    const stops2 = ticket.segments[1].stops.length;
+
+    if (transfers.all) return true;
+    if (stops1 === 0 && stops2 === 0 && transfers.no) return true;
+    if (stops1 === 0 && stops2 === 1 && transfers.one) return true;
+    if (stops1 === 0 && stops2 === 2 && transfers.two) return true;
+    if (stops1 === 0 && stops2 === 3 && transfers.three) return true;
+
+    return false;
+  };
+  useEffect(() => {
+    if (tickets.length > 0) {
+      dispatch(sortTickets({ tickets: tickets.filter(filterTickets) }));
+    }
+  }, [dispatch, selectedFilter, transfers]);
+
+  const sortedTickets = useSelector((state) => state.filters.sortedTickets);
 
   const handleShowMore = () => {
-    setVisibleCount((prevCount) => prevCount + 5); // Увеличиваем количество отображаемых билетов на 5
+    setVisibleCount((prevCount) => prevCount + 5);
   };
+
+  if (loading) {
+    return (
+      <div>
+        <Alert
+          message="Загрузка билетов..."
+          type="info"
+          showIcon
+          style={{ marginBottom: "20px" }}
+        />
+        <Spin
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (ticketsError) {
+    return (
+      <Alert
+        style={{ marginBottom: "20px" }}
+        type="error"
+        description={ticketsError}
+      />
+    );
+  }
+
+  if (sortedTickets.length === 0 && !loading) {
+    return (
+      <Alert
+        style={{ marginBottom: "20px" }}
+        message="Рейсов, подходящих под заданные фильтры, не найдено"
+        type="warning"
+      />
+    );
+  }
 
   return (
     <div>
-      {loading && (
-        <>
-          <Alert
-            message="Загрузка билетов..."
-            type="info"
-            showIcon
-            style={{ marginBottom: "20px" }}
-          />
-          <Spin
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              width: "100%",
-            }}
-          />
-        </>
-      )}
-
       <ul className={cl.ListTickets}>
-        {tickets.slice(0, visibleCount).map((ticket) => (
+        {sortedTickets.slice(0, visibleCount).map((ticket) => (
           <TicketCard key={ticket.id} ticket={ticket} />
         ))}
       </ul>
-      {visibleCount < tickets.length && (
+      {visibleCount < sortedTickets.length && (
         <button
           className={cl["btn-show"]}
           type="button"

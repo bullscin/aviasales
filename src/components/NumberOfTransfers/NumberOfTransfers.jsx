@@ -40,32 +40,32 @@ export default function NumberOfTransfers() {
         </li>
         <li className={cl.checkbox__item}>
           <Checkbox
-            checked={filters.noTransfers}
-            onChange={() => handleCheckboxChange("noTransfers")}
+            checked={filters.no}
+            onChange={() => handleCheckboxChange("no")}
           >
             Без пересадок
           </Checkbox>
         </li>
         <li className={cl.checkbox__item}>
           <Checkbox
-            checked={filters.oneTransfer}
-            onChange={() => handleCheckboxChange("oneTransfer")}
+            checked={filters.one}
+            onChange={() => handleCheckboxChange("one")}
           >
             1 пересадка
           </Checkbox>
         </li>
         <li className={cl.checkbox__item}>
           <Checkbox
-            checked={filters.twoTransfers}
-            onChange={() => handleCheckboxChange("twoTransfers")}
+            checked={filters.two}
+            onChange={() => handleCheckboxChange("two")}
           >
             2 пересадки
           </Checkbox>
         </li>
         <li className={cl.checkbox__item}>
           <Checkbox
-            checked={filters.threeTransfers}
-            onChange={() => handleCheckboxChange("threeTransfers")}
+            checked={filters.three}
+            onChange={() => handleCheckboxChange("three")}
           >
             3 пересадки
           </Checkbox>
