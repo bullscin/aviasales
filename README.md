@@ -1,1 +1,1 @@
-bullscin.github.io/aviasales/
+https://bullscin.github.io/aviasales/
