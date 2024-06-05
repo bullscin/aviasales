@@ -4,7 +4,7 @@ import { format, addMinutes } from "date-fns";
 import logo from "../../img/S7 Logo.svg";
 import cl from "./TicketCard.module.scss";
 
-function TicketCard({ ticket }) {
+export default function TicketCard({ ticket }) {
   const formattedPrice = new Intl.NumberFormat("ru-RU").format(ticket.price);
 
   // Функция для форматирования времени
@@ -84,5 +84,3 @@ function TicketCard({ ticket }) {
     </li>
   );
 }
-
-export default TicketCard;

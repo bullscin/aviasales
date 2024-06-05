@@ -8,7 +8,7 @@ import { fetchSearchId, fetchTickets } from "../../service/service";
 
 import cl from "./Page.module.scss";
 
-function Page() {
+export default function Page() {
   const dispatch = useDispatch();
 
   // Получение searchId и ошибки из Redux Store
@@ -51,5 +51,3 @@ function Page() {
     </main>
   );
 }
-
-export default Page;

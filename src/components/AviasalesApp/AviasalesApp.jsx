@@ -5,7 +5,7 @@ import Page from "../Page/Page";
 import "../../default-style/style.module.scss";
 import cl from "./AviasalesApp.module.scss";
 
-function AviasalesApp() {
+export default function AviasalesApp() {
   return (
     <div className={cl.container}>
       <header className={cl.header}>
@@ -15,5 +15,3 @@ function AviasalesApp() {
     </div>
   );
 }
-
-export default AviasalesApp;
