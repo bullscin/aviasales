@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+/* eslint-disable consistent-return */
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Alert, Spin } from "antd";
 import TicketCard from "../TicketCard/TicketCard";
 import cl from "./ListTickets.module.scss";
 import { sortTickets } from "../../store/slices/filterSlice";
+// Это импорт для вашего async экшена
+import { fetchTickets } from "../../service/service";
 
 export default function ListTickets() {
   const [visibleCount, setVisibleCount] = useState(5);
@@ -13,8 +16,7 @@ export default function ListTickets() {
   const ticketsError = useSelector((state) => state.tickets.error);
   const selectedFilter = useSelector((state) => state.filters.selected);
   const transfers = useSelector((state) => state.transfers);
-
-  const timerRef = useRef(null);
+  const stopSearch = useSelector((state) => state.tickets.stop);
 
   const filterTickets = (ticket) => {
     const stops1 = ticket.segments[0].stops.length;
@@ -48,16 +50,18 @@ export default function ListTickets() {
   };
 
   useEffect(() => {
+    if (!stopSearch) {
+      const timeout = setInterval(() => {
+        dispatch(fetchTickets());
+      }, 2500);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [stopSearch]);
+
+  useEffect(() => {
     const filteredTickets = tickets.filter(filterTickets);
     dispatch(sortTickets({ tickets: filteredTickets }));
-
-    // Устанавливаем таймер для обновления билетов
-    timerRef.current = setTimeout(() => {
-      const updatedTickets = tickets.filter(filterTickets); // здесь можно добавить логику обновления билетов
-      dispatch(sortTickets({ tickets: updatedTickets }));
-    }, 30000); // обновление каждые 30 секунд
-    // Очищаем таймер при размонтировании компонента или изменении зависимостей
-    return () => clearTimeout(timerRef.current);
   }, [tickets, transfers, selectedFilter, dispatch]);
 
   const sortedTickets = useSelector((state) => state.filters.sortedTickets);

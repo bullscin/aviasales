@@ -5,6 +5,11 @@ import { fetchSearchId } from '../../service/service';
 const searchIdSlice = createSlice({
   name: 'searchId',
   initialState: { searchId: null, error: null },
+  reducers: {
+    setSearchId(state, action) {
+      state.searchId = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSearchId.fulfilled, (state, action) => {
@@ -15,5 +20,7 @@ const searchIdSlice = createSlice({
       });
   },
 });
+
+export const { setSearchId } = searchIdSlice.actions;
 
 export default searchIdSlice.reducer;

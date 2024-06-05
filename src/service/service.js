@@ -39,7 +39,8 @@ export const fetchSearchId = createAsyncThunk(
 
 export const fetchTickets = createAsyncThunk(
   'tickets',
-  async (searchId, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
+    const { searchId } = getState().search;
     try {
       const response = await fetch(
         `https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`,

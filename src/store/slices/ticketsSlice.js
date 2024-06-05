@@ -27,6 +27,7 @@ const ticketsSlice = createSlice({
             id: generateUniqueId(),
           })),
         ];
+
         state.stop = action.payload.stop;
       })
       .addCase(fetchTickets.rejected, (state, action) => {
